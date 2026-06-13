@@ -7,21 +7,21 @@ import re
 client = ScrapingBeeClient(api_key='TQ5UX1YZBS75GGVS8QWB7TPL37R9R42VI5XMI3GKHOM4PGJG6U9XZLINKPERK06QQBY2PIME2W3MYDC2')   # ←←← THAY VÀO ĐÂY
 
 BRANDS_CONFIG = {
-    # "samsung": 6,
-    # "huawei": 6,
-    # "xiaomi": 8,
-    # "oppo": 6,
-    # "honor": 4,
-    # "realme": 4,
-    # "vivo": 7,
-    # "tecno": 3,
-    #r"google": 1,
-    # "zte": 3,
-    #r"oneplus": 2,
-    #r"sony": 1,
-    #r"nothing": 1,
-    #r"infinix": 1,
-    #"meizu": 1,
+    "samsung": 6,
+    "huawei": 6,
+    "xiaomi": 8,
+    "oppo": 6,
+    "honor": 4,
+    "realme": 4,
+    "vivo": 7,
+    "tecno": 3,
+    r"google": 1,
+    "zte": 3,
+    r"oneplus": 2,
+    r"sony": 1,
+    r"nothing": 1,
+    r"infinix": 1,
+    "meizu": 1,
 }
 
 BRAND_INFO = {
@@ -173,12 +173,12 @@ def main():
             if (i + 1) % 10 == 0:
                 with open(progress_file, "wb") as f:
                     pickle.dump({"specs": all_specs, "index": i+1, "phones": phones}, f)
-
-        df = pd.DataFrame(all_specs)
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M")
-        filename = f"{BRAND_NAME}_{len(df)}_phones_{timestamp}.csv"
-        df.to_csv(filename, index=False, encoding="utf-8-sig")
-        print(f"✅ HOÀN THÀNH {BRAND_NAME.upper()}: {len(df)} phones → {filename}\n")
+            
+            df = pd.DataFrame(all_specs) 
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M") 
+            filename = f"{BRAND_NAME}_{len(df)}_phones_{timestamp}.csv" 
+            df.to_csv(filename, index=False, encoding="utf-8-sig") 
+            print(f"✅ HOÀN THÀNH {BRAND_NAME.upper()}: {len(df)} phones → {filename}\n")
 
 if __name__ == "__main__":
     main()
