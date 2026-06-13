@@ -4,10 +4,8 @@ import time, random, pickle, pandas as pd
 from datetime import datetime
 import re
 
-# ================== THAY API KEY CỦA BẠN VÀO ĐÂY ==================
 client = ScrapingBeeClient(api_key='TQ5UX1YZBS75GGVS8QWB7TPL37R9R42VI5XMI3GKHOM4PGJG6U9XZLINKPERK06QQBY2PIME2W3MYDC2')   # ←←← THAY VÀO ĐÂY
 
-# ================== CONFIG ==================
 BRANDS_CONFIG = {
     # "samsung": 6,
     # "huawei": 6,
@@ -47,7 +45,6 @@ BRAND_INFO = {
 BASE_URL = "https://www.gsmarena.com/"
 WANTED_SECTIONS = {"Body", "Display", "Platform", "Memory", "Main Camera", "Selfie camera", "Battery"}
 
-# ================== SAFE GET với ScrapingBee ==================
 def safe_get(url: str, retries: int = 6) -> BeautifulSoup | None:
     for attempt in range(retries):
         try:
@@ -82,7 +79,6 @@ def safe_get(url: str, retries: int = 6) -> BeautifulSoup | None:
     return None
 
 
-# ================== FETCH BRAND PHONES ==================
 def fetch_brand_phones(brand_name: str, max_pages: int) -> list:
     brand_id, brand_prefix = BRAND_INFO.get(brand_name.lower(), (None, None))
     if not brand_id:
@@ -114,7 +110,6 @@ def fetch_brand_phones(brand_name: str, max_pages: int) -> list:
     return phones
 
 
-# ================== SCRAPE SPECS ==================
 def scrape_specs(slug: str, brand_name: str) -> dict:
     url = BASE_URL + slug
     soup = safe_get(url)
@@ -143,7 +138,6 @@ def scrape_specs(slug: str, brand_name: str) -> dict:
     return specs
 
 
-# ================== MAIN ==================
 def main():
     for BRAND_NAME, MAX_PAGES in BRANDS_CONFIG.items():
         print(f"\n{'='*80}")
@@ -172,17 +166,14 @@ def main():
             if specs:
                 all_specs.append(specs)
 
-            # Nghỉ dài hơn sau mỗi 25 phones
             if (i + 1) % 25 == 0 and i + 1 < len(phones):
                 print("⏸️  Nghỉ 6 phút để tránh bị chặn...")
                 time.sleep(360)
 
-            # Checkpoint
             if (i + 1) % 10 == 0:
                 with open(progress_file, "wb") as f:
                     pickle.dump({"specs": all_specs, "index": i+1, "phones": phones}, f)
 
-        # Lưu file CSV
         df = pd.DataFrame(all_specs)
         timestamp = datetime.now().strftime("%Y%m%d_%H%M")
         filename = f"{BRAND_NAME}_{len(df)}_phones_{timestamp}.csv"

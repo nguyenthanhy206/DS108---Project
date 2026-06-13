@@ -14,9 +14,8 @@ HEADERS = {
 
 def setup_driver():
     options = webdriver.ChromeOptions()
-    options.page_load_strategy = 'eager' #hạn chế tải hình ảnh, ads trên web
+    options.page_load_strategy = 'eager'
 
-    #Tắt load hình ảnh, CSS, và popup mặc định
     prefs = {
         "profile.managed_default_content_settings.images": 2,
         "profile.default_content_setting_values.notifications": 2,
@@ -24,12 +23,11 @@ def setup_driver():
     }
     options.add_experimental_option("prefs", prefs)
 
-    # Thêm vài đối số giúp Chrome chạy nhẹ hơn trên máy
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
 
-    driver = webdriver.Chrome(options = options) #gọi Chrome
+    driver = webdriver.Chrome(options = options)
 
     return driver
 
@@ -38,7 +36,6 @@ def load_full_page(driver, url):
     time.sleep(2)
 
     while True:
-        #tắt pop-up quảng cáo, v.v...
         try:
             close_buttons = driver.find_elements(By.CSS_SELECTOR, "button.cancel-button-top")
         
@@ -49,7 +46,6 @@ def load_full_page(driver, url):
         except Exception:
             pass
 
-        #Load more
         try:
             button = WebDriverWait(driver, 1).until(
             EC.element_to_be_clickable((By.CSS_SELECTOR, "a.button.btn-show-more.button__show-more-product"))    
@@ -130,8 +126,6 @@ def save_to_csv(data, name):
 def main():
     url = "https://cellphones.com.vn/mobile.html"
     driver = setup_driver()
-    # html_src = load_full_page(driver, url)
-    # products = get_products(html_src)
     products = pd.read_csv(r'cellphones_raw.csv')
     products = products.to_dict('records')
     detail_products = get_product_spec(driver, products)

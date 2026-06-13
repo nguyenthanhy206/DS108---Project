@@ -4,7 +4,6 @@ import re
 from sklearn.impute import KNNImputer
 from sklearn.preprocessing import MinMaxScaler
 
-#----- CLEANING --------------
 
 def clean_phone_name(raw_name):
     if pd.isna(raw_name):
@@ -14,13 +13,11 @@ def clean_phone_name(raw_name):
     if not name:
         return ""
 
-    # Chuẩn hóa dấu nối và loại bỏ phân đoạn không cần thiết
     name = re.sub(r"[\u2010\u2013\u2014\u2212]", "-", name)
     name = re.sub(r"\s*\|\s*.*$", "", name)
     name = re.sub(r"\bđiện thoại\b", "", name, flags=re.I)
     name = re.sub(r"\b(?:ram|rom)\b", "", name, flags=re.I)
 
-    # Xóa các cụm từ quảng cáo / danh mục không phải model
     patterns_to_delete = [
         r"mới",
         r"chính hãng",
@@ -54,12 +51,10 @@ def clean_phone_name(raw_name):
 
     name = re.sub(r"\b(?:4g|5g|nfc|lte|wifi|bluetooth)\b", "", name, flags=re.I)
 
-    # Xóa dung lượng RAM/ROM/ổ cứng
     name = re.sub(r"\b\d+(?:[\.,]\d+)?\s*(?:gb|tb|mb)\b", "", name, flags=re.I)
     name = re.sub(r"\b\d+\s*[x×]\s*\d+\s*(?:gb|tb|mb)\b", "", name, flags=re.I)
     name = re.sub(r"\b\d+\s*[+\/]\s*\d+\s*(?:gb|tb|mb)\b", "", name, flags=re.I)
 
-    # Loại bỏ ký tự không cần và chuẩn hóa khoảng trắng
     name = re.sub(r"[\[\]\(\)\{\}]", " ", name)
     name = re.sub(r"[^\w\s\-]+", " ", name)
     name = re.sub(r"\s{2,}", " ", name)
@@ -213,7 +208,6 @@ def advanced_clean_os(text, brand):
 
 
 def clean_battery(raw_value):
-    # Bước 0: NaN → None
     if pd.isna(raw_value):
         return None
 
@@ -246,7 +240,6 @@ def clean_sim_options(text):
         nano_in_opt = 0
         esim_in_opt = 0
 
-        # eSIM
         if "esim" in option:
             match_esim = re.search(r"(\d+)\s*esim", option)
             if match_esim:
@@ -256,7 +249,6 @@ def clean_sim_options(text):
             else:
                 esim_in_opt = 1
 
-        # Nano SIM
         if "nano" in option or "sim 1 + sim 2" in option:
             match_nano = re.search(r"(\d+)\s*nano", option)
             if match_nano:
