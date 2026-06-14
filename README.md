@@ -1,6 +1,4 @@
-Dưới đây là toàn bộ mã nguồn nội dung file `README.md` hoàn chỉnh, được tích hợp đầy đủ cấu trúc phân tầng, bổ sung module `cleaning.py` vào thư mục `notebooks/`, file `CODEBOOK.md` ở thư mục gốc và tích hợp giải pháp đồng bộ dữ liệu đa nguồn chi tiết:
-
-# 📱 Hệ Thống Khuyến Nghị Smartphone Đa Nguồn & Dashboard Phân Tích
+# Hệ Thống Khuyến Nghị Smartphone Đa Nguồn & Dashboard Phân Tích
 
 Hệ thống khuyến nghị Smartphone toàn diện sử dụng kiến trúc dữ liệu 3 tầng, tích hợp dữ liệu đa nguồn từ các nền tảng thương mại và phần cứng danh tiếng (CellphoneS, GSMarena, Nanoreview). Hệ thống thực hiện bộ lọc lai (Lọc cứng theo nhu cầu + Lọc mềm bằng toán học hình học góc Cosine) đi kèm giao diện Dashboard tương tác trực quan hóa bằng Streamlit.
 
