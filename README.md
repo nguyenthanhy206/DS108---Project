@@ -142,7 +142,7 @@ Toàn bộ tài nguyên mã nguồn và dữ liệu của dự án được phâ
 
 ##  6. Một Số Lưu Ý Quan Trọng (Troubleshooting & Notes)
 
-* **Lỗi API Key:** Nhớ cấu hình lại API Key của ScrapingBee trong file `gsmarena_scraping.py` trước khi chạy tiến trình cào dữ liệu.
+* **Lỗi API Key:** Làm mới/ Thay đổi API Key của ScrapingBee trong file `gsmarena_scraping.py` trước khi chạy tiến trình cào dữ liệu.
 * **Lỗi Driver Selenium:** Nếu `undetected-chromedriver` trong script Nanoreview báo lỗi, hãy kiểm tra lại phiên bản Google Chrome hiện tại trên thiết bị để đảm bảo tính tương thích và cập nhật `version_main` trong code.
 * **Xử lý NaN toán học:** Quy trình xử lý missing data đã được tự động hóa. Nếu gặp lỗi toán học dạng bộ nhớ hoặc phép chia cho không ($0/0$) phát sinh khi chuẩn hóa ma trận đặc trưng, hệ thống sẽ tự động vá bằng `.fillna(0)`.
 
