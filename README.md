@@ -114,6 +114,7 @@ Toàn bộ tài nguyên mã nguồn và dữ liệu của dự án được phâ
 │   │   ├── cellphones_raw.csv
 │   │   ├── antutu_socket.csv
 │   │   └── GSMarena.csv      # File kết quả sau khi merge lọc theo tên máy CellphoneS
+|   |   └── specs/            # Chứa tất cả các file thông số của các điện thoại lấy từ GSMarena (chia theo từng hãng)
 │   └── processed/            # Bộ ba file cấu trúc 3 tầng hoàn chỉnh sau tiền xử lý
 │       ├── df_cleaned.csv    # Tầng hiển thị giao diện
 │       ├── tag_matrix.csv    # Tầng lọc thô (Hard-Filter)
