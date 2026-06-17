@@ -66,7 +66,7 @@ python notebooks/gsmarena_scraping.py
 
 >  **HƯỚNG DẪN ĐỒNG BỘ DỮ LIỆU GSMARENA (Giải pháp gộp dữ liệu):**
 > Do dữ liệu GSMarena được cào riêng lẻ theo từng hãng và chứa cả các model quốc tế không kinh doanh tại Việt Nam, bạn cần thực hiện gộp dữ liệu để định hình lại file `GSMarena.csv` chuẩn:
-> * **Cách thực hiện:** Tiến hành hợp nhất (Merge) các file cấu hình thô của GSMarena với cột `name` của file danh mục `cellphones_raw.csv` thông qua cơ chế phương thức giao thoa `how='inner'`.
+> * **Cách thực hiện:** Tiến hành hợp nhất (Merge) các file cấu hình thô của GSMarena (file `specs`) với cột `name` của file danh mục `cellphones_raw.csv` thông qua cơ chế phương thức giao thoa `how='inner'`.
 > * **Mục đích:** Việc này đóng vai trò như một bộ lọc, giúp **chỉ giữ lại những dòng sản phẩm vừa có tên trong danh mục kinh doanh thực tế, vừa có đầy đủ thông số phần cứng chi tiết bên GSMarena**, loại bỏ hoàn toàn các máy rác không thu thập được thông tin để tạo ra file `GSMarena.csv` tinh gọn cuối cùng.
 > 
 > 
